@@ -1,15 +1,13 @@
 #!/usr/bin/python3
 
-import pathlib
 import platform
 import os
 from pathlib import Path
 import json
-import os
 import stat
 
-messenger_path = os.path.dirname(__file__) + "/messenger.py"
-
+messenger_path = Path(__file__).parent.resolve() / "messenger.py"
+print(messenger_path)
 # Make messenger.py executable
 st = os.stat(messenger_path)
 os.chmod(messenger_path, st.st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
@@ -29,7 +27,7 @@ def get_path(path):
 manifest = {
   "name": "rango",
   "description": "Native application host to use in conjunction with the rango extension and talon",
-  "path": messenger_path,
+  "path": str(messenger_path),
   "type": "stdio",
   "allowed_extensions": ["rango@david-tejada"]
 }
